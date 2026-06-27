@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Faheem Anwar — Full Stack .NET Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0D1B2A;
+      --bg2:       #1E2D40;
+      --bg3:       #162233;
+      --teal:      #00D4AA;
+      --teal-dim:  #00a888;
+      --text:      #F0EDE6;
+      --muted:     #8A9BB0;
+      --border:    #263549;
+      --mono:      'JetBrains Mono', monospace;
+      --sans:      'Inter', sans-serif;
+      --display:   'Space Grotesk', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2rem;
+      height: 60px;
+      background: rgba(13, 27, 42, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 0.9rem;
+      color: var(--teal);
+      letter-spacing: 0.05em;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-family: var(--sans);
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--teal); }
+
+    /* ── SECTIONS ── */
+    section { padding: 5rem 0; }
+    .container { max-width: 860px; margin: 0 auto; padding: 0 2rem; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding-top: 60px;
+      position: relative;
+      overflow: hidden;
+    }
+    #hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 50% at 70% 40%, rgba(0,212,170,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-content { position: relative; z-index: 1; }
+    .hero-tag {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--teal);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+    .hero-tag::before {
+      content: '';
+      display: inline-block; width: 28px; height: 1px;
+      background: var(--teal);
+    }
+    h1.hero-name {
+      font-family: var(--display);
+      font-size: clamp(3rem, 8vw, 5.5rem);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+    .hero-title-line {
+      font-family: var(--mono);
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      color: var(--muted);
+      margin-bottom: 1.8rem;
+      min-height: 2em;
+    }
+    .cursor {
+      display: inline-block;
+      width: 2px; height: 1.1em;
+      background: var(--teal);
+      margin-left: 3px;
+      vertical-align: middle;
+      animation: blink 0.9s step-end infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+    .hero-desc {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 520px;
+      margin-bottom: 2.4rem;
+      line-height: 1.7;
+    }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.7rem 1.5rem;
+      font-family: var(--sans);
+      font-size: 0.875rem;
+      font-weight: 500;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-primary {
+      background: var(--teal);
+      color: #0D1B2A;
+    }
+    .btn-primary:hover { background: #00eec0; transform: translateY(-1px); }
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--teal); color: var(--teal); }
+
+    /* ── SECTION HEADINGS ── */
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--teal);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+    h2.section-title {
+      font-family: var(--display);
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 2.5rem;
+    }
+    .divider {
+      width: 100%; height: 1px;
+      background: var(--border);
+      margin: 5rem 0;
+    }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    .about-text p { color: var(--muted); line-height: 1.75; margin-bottom: 1rem; }
+    .about-text p span { color: var(--text); }
+    .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .stat-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.2rem;
+    }
+    .stat-num {
+      font-family: var(--display);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--teal);
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+    .stat-label { font-size: 0.8rem; color: var(--muted); }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1rem;
+    }
+    .skill-group {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.4rem;
+    }
+    .skill-group-title {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--teal);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 0.9rem;
+    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .tag {
+      font-size: 0.78rem;
+      font-family: var(--mono);
+      background: var(--bg3);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+    }
+
+    /* ── EXPERIENCE ── */
+    .exp-list { display: flex; flex-direction: column; gap: 2rem; }
+    .exp-card {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 2rem;
+      position: relative;
+    }
+    .exp-card::before {
+      content: '';
+      position: absolute;
+      left: 152px; top: 0; bottom: -2rem;
+      width: 1px;
+      background: var(--border);
+    }
+    .exp-card:last-child::before { display: none; }
+    .exp-meta {
+      text-align: right;
+      padding-right: 2rem;
+    }
+    .exp-date {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--teal);
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+    .exp-company {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+    .exp-dot {
+      position: absolute;
+      left: 148px;
+      top: 6px;
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      background: var(--teal);
+      box-shadow: 0 0 0 3px var(--bg), 0 0 0 4px var(--teal);
+    }
+    .exp-body {}
+    .exp-role {
+      font-family: var(--display);
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+    }
+    .exp-points { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .exp-points li {
+      font-size: 0.9rem;
+      color: var(--muted);
+      padding-left: 1.1rem;
+      position: relative;
+      line-height: 1.6;
+    }
+    .exp-points li::before {
+      content: '›';
+      position: absolute; left: 0;
+      color: var(--teal);
+      font-weight: 700;
+    }
+
+    /* ── PROJECTS ── */
+    .projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    .project-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.6rem;
+      display: flex; flex-direction: column;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .project-card:hover {
+      border-color: var(--teal);
+      transform: translateY(-2px);
+    }
+    .project-icon {
+      font-size: 1.6rem;
+      margin-bottom: 0.8rem;
+    }
+    .project-name {
+      font-family: var(--display);
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+    }
+    .project-desc {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.65;
+      flex: 1;
+      margin-bottom: 1rem;
+    }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+    /* ── CONTACT ── */
+    #contact { text-align: center; }
+    #contact .section-label { justify-content: center; display: flex; }
+    .contact-intro {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 480px;
+      margin: 0 auto 2rem;
+      line-height: 1.7;
+    }
+    .contact-links {
+      display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+    .contact-link {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+    .contact-link:hover { color: var(--teal); border-color: var(--teal); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      .about-grid { grid-template-columns: 1fr; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .exp-card { grid-template-columns: 1fr; }
+      .exp-card::before { display: none; }
+      .exp-meta { text-align: left; padding-right: 0; }
+      .exp-dot { display: none; }
+      .nav-links { display: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cursor { animation: none; }
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">faheem.dev</span>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="container hero-content">
+    <div class="hero-tag">Full Stack Developer</div>
+    <h1 class="hero-name">Faheem<br>Anwar</h1>
+    <div class="hero-title-line">
+      <span id="typed-text"></span><span class="cursor"></span>
+    </div>
+    <p class="hero-desc">
+      I build fast, reliable backend systems and clean web interfaces — specialising in ASP.NET Core APIs, SQL optimisation, and React frontends for enterprise-grade applications.
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn btn-primary">Get in touch</a>
+      <a href="#experience" class="btn btn-outline">View my work</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="section-label">About</div>
+    <h2 class="section-title">Who I am</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I'm a <span>Full Stack .NET Developer</span> based in Coimbatore with 3+ years building scalable enterprise applications. My focus is on writing clean, maintainable server-side code that holds up under real-world load.</p>
+        <p>I've shipped production systems across <span>traffic enforcement</span> and <span>financial technology</span> — domains where correctness isn't optional. I resolve production incidents fast, optimise slow queries, and care about the reliability of what I build after it goes live.</p>
+        <p>I work well in Agile teams using Azure DevOps, and I'm always pushing toward cleaner architecture and better performance.</p>
+      </div>
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-num">3+</div>
+          <div class="stat-label">Years of experience</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">100+</div>
+          <div class="stat-label">Production issues resolved</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">2</div>
+          <div class="stat-label">Enterprise domains shipped</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">B.E.</div>
+          <div class="stat-label">Computer Science, 2023</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container"><div class="divider"></div></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <div class="section-label">Skills</div>
+    <h2 class="section-title">What I work with</h2>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <div class="skill-group-title">Backend</div>
+        <div class="skill-tags">
+          <span class="tag">C#</span>
+          <span class="tag">ASP.NET Core</span>
+          <span class="tag">ASP.NET MVC</span>
+          <span class="tag">Entity Framework Core</span>
+          <span class="tag">ADO.NET</span>
+          <span class="tag">LINQ</span>
+          <span class="tag">JWT Auth</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Database</div>
+        <div class="skill-tags">
+          <span class="tag">MS SQL Server</span>
+          <span class="tag">T-SQL</span>
+          <span class="tag">Stored Procedures</span>
+          <span class="tag">Query Optimisation</span>
+          <span class="tag">Indexes</span>
+          <span class="tag">Database Design</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Frontend</div>
+        <div class="skill-tags">
+          <span class="tag">ReactJS</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+          <span class="tag">Bootstrap</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Tools & Cloud</div>
+        <div class="skill-tags">
+          <span class="tag">Git</span>
+          <span class="tag">Azure DevOps</span>
+          <span class="tag">Azure App Services</span>
+          <span class="tag">IIS</span>
+          <span class="tag">Postman</span>
+          <span class="tag">Swagger</span>
+          <span class="tag">Visual Studio</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Concepts</div>
+        <div class="skill-tags">
+          <span class="tag">REST APIs</span>
+          <span class="tag">Clean Architecture</span>
+          <span class="tag">Repository Pattern</span>
+          <span class="tag">Dependency Injection</span>
+          <span class="tag">Microservices</span>
+          <span class="tag">Agile / Scrum</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container"><div class="divider"></div></div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <div class="section-label">Experience</div>
+    <h2 class="section-title">Where I've worked</h2>
+    <div class="exp-list">
+
+      <div class="exp-card">
+        <div class="exp-meta">
+          <span class="exp-date">Nov 2025 – Present</span>
+          <span class="exp-company">LogicValley Technologies<br>Coimbatore</span>
+          <div class="exp-dot"></div>
+        </div>
+        <div class="exp-body">
+          <div class="exp-role">Software Engineer</div>
+          <ul class="exp-points">
+            <li>Designed and developed scalable RESTful APIs using ASP.NET Core and Entity Framework Core for a UK traffic enforcement platform.</li>
+            <li>Built high-performance workflows for real-time traffic violation processing, including image and timestamp handling.</li>
+            <li>Optimised complex SQL queries and stored procedures, significantly improving API response times and database throughput.</li>
+            <li>Resolved 100+ production incidents, improving system stability and reducing downtime across live enforcement systems.</li>
+            <li>Collaborated with cross-functional teams using Git and Azure DevOps in an Agile/Scrum environment.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-meta">
+          <span class="exp-date">May 2023 – Apr 2025</span>
+          <span class="exp-company">Zoi Fintech Services<br>Tirunelveli</span>
+          <div class="exp-dot"></div>
+        </div>
+        <div class="exp-body">
+          <div class="exp-role">Junior Full Stack Developer</div>
+          <ul class="exp-points">
+            <li>Built secure backend APIs for financial transaction and portfolio management features with role-based access control.</li>
+            <li>Developed reusable ReactJS components for financial, wealth, and internal business applications.</li>
+            <li>Wrote and optimised T-SQL stored procedures and queries to improve application performance.</li>
+            <li>Debugged production issues and collaborated with senior developers across Agile sprints.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="container"><div class="divider"></div></div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <div class="section-label">Projects</div>
+    <h2 class="section-title">What I've built</h2>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-icon">🚦</div>
+        <div class="project-name">UK Traffic Enforcement & PCN System</div>
+        <p class="project-desc">
+          End-to-end traffic enforcement platform used by Civil Enforcement Officers to issue Penalty Charge Notices. Handles real-time processing of violation data — images, timestamps, GPS locations — across complex business workflows. Resolved 100+ production issues and optimised core APIs for scale.
+        </p>
+        <div class="project-tags">
+          <span class="tag">ASP.NET Core</span>
+          <span class="tag">EF Core</span>
+          <span class="tag">SQL Server</span>
+          <span class="tag">Azure</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon">💼</div>
+        <div class="project-name">Financial Management System</div>
+        <p class="project-desc">
+          Secure backend for financial transaction processing and portfolio management. Implemented JWT-based role-based access control, data validation layers, and optimised stored procedures for high-volume financial data queries.
+        </p>
+        <div class="project-tags">
+          <span class="tag">ASP.NET Core</span>
+          <span class="tag">ReactJS</span>
+          <span class="tag">T-SQL</span>
+          <span class="tag">JWT</span>
+        </div>
+      </div>
+
+
+      <div class="project-card">
+        <div class="project-icon">🎓</div>
+        <div class="project-name">Student Management System</div>
+        <p class="project-desc">
+          Full-featured system for managing student records, grades, attendance, and fee payments. Built a RESTful API backend with ASP.NET Core and a responsive ReactJS frontend, backed by SQL Server with optimised queries for reporting and data retrieval across large student datasets.
+        </p>
+        <div class="project-tags">
+          <span class="tag">ASP.NET Core</span>
+          <span class="tag">ReactJS</span>
+          <span class="tag">SQL Server</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="container"><div class="divider"></div></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="section-label">Contact</div>
+    <h2 class="section-title">Let's work together</h2>
+    <p class="contact-intro">
+      I'm open to new opportunities — full-time roles, contract work, or just a conversation about an interesting problem. Feel free to reach out.
+    </p>
+    <a href="mailto:faheemanwar406@gmail.com" class="btn btn-primary" style="margin: 0 auto; display: inline-flex;">
+      faheemanwar406@gmail.com
+    </a>
+    <div class="contact-links">
+      <a href="tel:+918428286390" class="contact-link">📞 +91 84282 86390</a>
+      <a href="https://github.com/Faheem280202" class="contact-link" target="_blank">GitHub</a>
+      <a href="https://linkedin.com/in/" class="contact-link" target="_blank">LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>Built by Faheem Anwar · 2026</span>
+</footer>
+
+<script>
+  // Typewriter effect
+  const phrases = [
+    '.NET & ASP.NET Core Developer',
+    'REST API Architect',
+    'SQL Performance Engineer',
+    'React Frontend Developer',
+  ];
+  let pi = 0, ci = 0, deleting = false;
+  const el = document.getElementById('typed-text');
+
+  function type() {
+    const phrase = phrases[pi];
+    if (!deleting) {
+      el.textContent = phrase.slice(0, ++ci);
+      if (ci === phrase.length) {
+        deleting = true;
+        setTimeout(type, 1800);
+        return;
+      }
+    } else {
+      el.textContent = phrase.slice(0, --ci);
+      if (ci === 0) {
+        deleting = false;
+        pi = (pi + 1) % phrases.length;
+      }
+    }
+    setTimeout(type, deleting ? 40 : 65);
+  }
+  type();
+
+  // Scroll-triggered fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.skill-group, .project-card, .exp-card, .stat-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(16px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
